@@ -51,7 +51,28 @@ function onResultsHands(results) {
 		anular_medio_dist=landmarks[12].x*100-landmarks[16].x*100;
 		menique_anular_dist=landmarks[15].x*100-landmarks[20].x*100;
 		pulgar_indice_dist=landmarks[4].x*100-landmarks[6].x*100;
-		console.log(pulgar_indice_dist);
+		pulgar_nudillos_dist=landmarks[2].x*100-landmarks[5].x*100;
+		indice_medio_8=landmarks[8].x*100-landmarks[12].x*100;
+		mano_volteada=landmarks[8].y*100-landmarks[12].y*100;
+		console.log(mano_volteada);
+		if(mano_volteada<-6){
+			mano_state="horizontal";
+		}
+		if(mano_volteada>-4){
+			mano_state="vertical";
+		}
+		if(indice_medio_8>8){
+			ocho_state="separados";
+		}
+		if(indice_medio_8<7){
+			ocho_state="juntos";
+		}
+		if(pulgar_nudillos_dist>4){
+			pulgar_nudillos_state="separados";
+		}
+		if(pulgar_nudillos_dist<4){
+			pulgar_nudillos_state="juntos";
+		}
 		if(pulgar_indice_dist>10){
 			pulgar_indice_state="separados";
 		}
@@ -123,7 +144,7 @@ function onResultsHands(results) {
             canvasCtx3.fillStyle = "green";
             canvasCtx3.fillText("1", 20, 100);
         }
-        if (pulgar_state=="abajo" && indice_state=="arriba" && medio_state=="arriba" && anular_state=="abajo" && menique_state=="abajo" && indice_medio_dist_state=="abierto" && indice_angle_state=="ok"){
+        if (mano_volteada>0 && pulgar_state=="abajo" && indice_state=="arriba" && medio_state=="arriba" && anular_state=="abajo" && menique_state=="abajo" && indice_medio_dist_state=="abierto" && indice_angle_state=="ok"){
             canvasCtx3.font = "bold 90px Arial";
             canvasCtx3.fillStyle = "green";
             canvasCtx3.fillText("2", 20, 100);
@@ -142,6 +163,21 @@ function onResultsHands(results) {
             canvasCtx3.font = "bold 90px Arial";
             canvasCtx3.fillStyle = "green";
             canvasCtx3.fillText("5", 20, 100);
+        }
+		if (pulgar_state=="arriba" && indice_state=="abajo" && medio_state=="abajo" && anular_state=="abajo" && menique_state=="abajo" && pulgar_nudillos_state=="separados" ){
+            canvasCtx3.font = "bold 90px Arial";
+            canvasCtx3.fillStyle = "green";
+            canvasCtx3.fillText("6", 20, 100);
+        }
+		if (pulgar_state=="arriba" && indice_state=="arriba" && medio_state=="abajo" && anular_state=="abajo" && menique_state=="abajo"){
+            canvasCtx3.font = "bold 90px Arial";
+            canvasCtx3.fillStyle = "green";
+            canvasCtx3.fillText("7", 20, 100);
+        }
+		if (pulgar_state=="arriba" && indice_state=="arriba" && medio_state=="arriba" && anular_state=="abajo" && menique_state=="abajo" && ocho_state=="separados" && mano_state=="horizontal"){
+            canvasCtx3.font = "bold 90px Arial";
+            canvasCtx3.fillStyle = "green";
+            canvasCtx3.fillText("8", 20, 100);
         }
     }
     }
